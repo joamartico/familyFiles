@@ -38,25 +38,20 @@ export default function Home() {
 	useEffect(() => {
 		listAll(familyRef).then((res) => {
 			res.items.forEach((item) => {
-				console.log("item", item);
 				getDownloadURL(item).then((url) => {
-					console.log("url", url);
 					setFiles((prevFiles) => [...prevFiles, url]);
 				});
 			});
 		});
 
 		getDocs(familiesRef).then((res) => {
-			console.log("res", res);
 			res.docs.map((doc) => {
-				console.log("doc", doc);
-				console.log("doc.data()", doc.data());
 				if (doc.data().name === familyName) {
 					setMembers(doc.data().members);
 				}
 			});
 		});
-	}, [userLogged]);
+	}, [userLogged, selectedMember]);
 
 	return (
 		<>
