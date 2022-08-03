@@ -33,11 +33,10 @@ export default class MyDocument extends Document {
 			<Html lang="en">
 				<Head>
 					<link rel="manifest" href="/manifest.json" />
-					<link rel="apple-touch-icon" href="/full.png" />
 
 					{/* ICONS */}
 					<link rel="icon" href="/rounded.png" />
-					<link rel="shortcut icon" href="/rounded.png" />
+					{/* <link rel="shortcut icon" href="/rounded.png" /> */}
 					<link rel="apple-touch-icon" href="/full.png" />
 					<link
 						rel="apple-touch-startup-image"

@@ -34,9 +34,10 @@ function MyApp({ Component, pageProps }) {
 				<title>FamilyFiles</title>
 				<meta
 					name="description"
-					content="FamilyFiles is your web app to search and track your family files"
+					content="FamilyFiles is your web app to save all your family members files"
 				/>
-				<meta name="keywords" content="family" />
+				<meta name="keywords" content="family, files" />
+				<meta name="google-site-verification" content="3XoSVdS7QLQWutddbE1sJ60XT3mFR-WXrP80V4AharU" />
 				{/*  PWA  */}
 				<meta
 					name="viewport"
