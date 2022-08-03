@@ -17,7 +17,7 @@ export default function Home() {
 
 	const { userLogged } = useGlobalState();
 	const familyName = userLogged?.email?.split("@")[0];
-	const familyRef = ref(storage, familyName + "/");
+	const familyRef = ref(storage, familyName + "/" + selectedMember + "/");
 	const familiesRef = collection(db, "families");
 
 	function uploadFile() {
