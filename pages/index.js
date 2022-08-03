@@ -22,7 +22,10 @@ export default function Home() {
 
 	function uploadFile() {
 		if (!selectedFile) return;
-		const fileRef = ref(storage, familyName + "/" + selectedMember + "/" + selectedFile.name);
+		const fileRef = ref(
+			storage,
+			familyName + "/" + selectedMember + "/" + selectedFile.name
+		);
 		uploadBytes(fileRef, selectedFile)
 			.then((snapshot) => {
 				getDownloadURL(snapshot.ref).then((url) => {
@@ -68,7 +71,9 @@ export default function Home() {
 			<ion-content fullscreen>
 				<ion-header collapse="condense" translucent>
 					<ion-toolbar>
-						<ion-title size="large">{selectedMember || familyName} Files</ion-title>
+						<ion-title size="large">
+							{selectedMember || familyName} Files
+						</ion-title>
 					</ion-toolbar>
 					<ion-toolbar>
 						<IonSearchbar
@@ -141,8 +146,19 @@ export default function Home() {
 										</ion-thumbnail>
 
 										<ion-label>
-											<h3>{url.split("/").pop()}</h3>
-											<p>{url}</p>
+											{/* <h3>{url.split("/").pop()}</h3> */}
+											<h3>
+												{
+													url
+														.split("/")
+														.pop()
+														.split("%")[2]
+														.slice(2)
+														.split("?")[0]
+												}
+											</h3>
+
+											{/* <p>{url}</p> */}
 										</ion-label>
 									</ion-item>
 								</a>
