@@ -41,8 +41,12 @@ export default function Home() {
 	useEffect(() => {
 		listAll(familyRef).then((res) => {
 			res.items.forEach((item) => {
+				console.log("item", item);
 				getDownloadURL(item).then((url) => {
-					setFiles((prevFiles) => [...prevFiles, url]);
+					setFiles((prevFiles) => [
+						...prevFiles,
+						{ url, name: item.name },
+					]);
 				});
 			});
 		});
@@ -132,8 +136,8 @@ export default function Home() {
 								<h2>Files</h2>
 							</ion-list-header>
 
-							{files.map((url) => (
-								<a href={url} target="_blank">
+							{files.map((file) => (
+								<a href={file.url} target="_blank">
 									<ion-item>
 										<ion-thumbnail
 											slot="start"
@@ -142,22 +146,12 @@ export default function Home() {
 												width: "100px",
 											}}
 										>
-											<Img src={url} />
+											<Img src={file.url} />
 										</ion-thumbnail>
 
 										<ion-label>
 											{/* <h3>{url.split("/").pop()}</h3> */}
-											<h3>
-												{
-													url
-														.split("/")
-														.pop()
-														.split("%")[2]
-														.slice(2)
-														.split("?")[0]
-												}
-											</h3>
-
+											<h3>{file.name}</h3>
 											{/* <p>{url}</p> */}
 										</ion-label>
 									</ion-item>
