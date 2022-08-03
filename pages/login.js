@@ -55,47 +55,47 @@ const login = () => {
 				</ion-list-header>
 
 				<ion-item>
-					<ion-label position="stacked">Email Familiar</ion-label>
+					<ion-label position="stacked">Family Email</ion-label>
 					<IonInput
 						name="email"
-						placeholder="Escribe el email de tu familia"
+						placeholder="lastname@gmail.com"
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 				</ion-item>
 
 				<ion-item>
-					<ion-label position="stacked">Contraseña</ion-label>
+					<ion-label position="stacked">Password</ion-label>
 					<IonInput
 						onChange={(e) => setPassword(e.target.value)}
-						placeholder="Escribe la contraseña"
+						placeholder="Write your password"
 						name="password"
 					/>
 				</ion-item>
 
 				<ion-button expand="block" onClick={loginUser}>
-					Ingresar
+					Sign In
 				</ion-button>
 			</ion-list>
 
 			<ion-list lines="" class="ion-margin-top">
 				<ion-list-header>
-					<ion-label>Crea una cuenta familiar</ion-label>
+					<ion-label>Create a family account</ion-label>
 				</ion-list-header>
 
 				<ion-item>
-					<ion-label position="stacked">Email Familiar</ion-label>
+					<ion-label position="stacked">Family Email</ion-label>
 					<IonInput
 						name="email"
 						onChange={(e) => setEmail(e.target.value)}
-						placeholder="Crea un email para tu familia"
+						placeholder="lastname@gmail.com"
 					/>
 				</ion-item>
 
 				<ion-item>
-					<ion-label position="stacked">Contraserña</ion-label>
+					<ion-label position="stacked">Password</ion-label>
 					<IonInput
 						onChange={(e) => setPassword(e.target.value)}
-						placeholder="Crea la contraseña"
+						placeholder="Create a password"
 						name="password"
 					/>
 				</ion-item>
@@ -105,7 +105,7 @@ const login = () => {
 					expand="block"
 					onClick={registerUser}
 				>
-					Crear
+					Sign Up
 				</ion-button>
 			</ion-list>
 		</ion-content>
