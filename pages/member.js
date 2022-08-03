@@ -1,6 +1,12 @@
-import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import {
+	deleteObject,
+	getDownloadURL,
+	listAll,
+	ref,
+	uploadBytes,
+} from "firebase/storage";
 import Router, { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import IonSearchbar from "../components/IonSearchbar";
 import { storage } from "../firebase";
@@ -9,14 +15,14 @@ const member = () => {
 	const [selectedFile, setSelectedFile] = useState();
 	const [files, setFiles] = useState([]);
 
-    const router = useRouter()
+	const inputFileRef = useRef()
 
-    const familyName = router.query.familyName;
-    const selectedMember = router.query.selectedMember;
+	const router = useRouter();
 
+	const familyName = router.query.familyName;
+	const selectedMember = router.query.selectedMember;
 
 	const familyRef = ref(storage, familyName + "/" + selectedMember + "/");
-
 
 	useEffect(() => {
 		listAll(familyRef).then((res) => {
@@ -41,12 +47,26 @@ const member = () => {
 		uploadBytes(fileRef, selectedFile)
 			.then((snapshot) => {
 				getDownloadURL(snapshot.ref).then((url) => {
-					setFiles((prevFiles) => [...prevFiles, url]);
+					setFiles((prevFiles) => [...prevFiles, {url, name: selectedFile.name}]);
+					setSelectedFile()
+					inputFileRef.current.value = null
 				});
-				alert("uploaded");
+				// alert("uploaded");
 			})
 			.catch((err) => {
 				console.log("error uploading", err);
+			});
+	}
+
+	function deleteFile(name) {
+		const fileRef = ref(storage, familyName + "/" + selectedMember + "/" + name)
+		deleteObject(fileRef)
+			.then(() => {
+				console.log("deleted")
+				setFiles((prevFiles) => prevFiles.filter((file) => file.name !== name));
+			})
+			.catch((error) => {
+				console.log("error", error)
 			});
 	}
 
@@ -92,6 +112,8 @@ const member = () => {
 									onChange={(e) =>
 										setSelectedFile(e.target.files[0])
 									}
+									ref={inputFileRef}
+
 								/>
 							</ion-label>
 
@@ -107,31 +129,40 @@ const member = () => {
 						</ion-item>
 					</ion-list>
 				</UploadFile>
+
 				<ion-list>
 					<ion-list-header>
 						<h2>Files</h2>
 					</ion-list-header>
 
 					{files.map((file) => (
-						<a href={file.url} target="_blank">
-							<ion-item>
-								<ion-thumbnail
-									slot="start"
-									style={{
-										height: "100px",
-										width: "100px",
-									}}
-								>
-									<Img src={file.url} />
-								</ion-thumbnail>
+						<ion-item-sliding>
+							<a href={file.url} target="_blank">
+								<ion-item>
+									<ion-thumbnail
+										slot="start"
+										style={{
+											height: "100px",
+											width: "100px",
+										}}
+									>
+										<Img src={file.url} />
+									</ion-thumbnail>
 
-								<ion-label>
-									{/* <h3>{url.split("/").pop()}</h3> */}
-									<h3>{file.name}</h3>
-									{/* <p>{url}</p> */}
-								</ion-label>
-							</ion-item>
-						</a>
+									<ion-label>
+										{/* <h3>{url.split("/").pop()}</h3> */}
+										<h3>{file.name}</h3>
+										{/* <p>{url}</p> */}
+									</ion-label>
+								</ion-item>
+							</a>
+
+							<ion-item-options side="end">
+								<ion-item-option onClick={() => deleteFile(file.name)} color="danger">
+									Delete
+								</ion-item-option>
+							</ion-item-options>
+						</ion-item-sliding>
 					))}
 				</ion-list>
 			</ion-content>
