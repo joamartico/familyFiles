@@ -31,14 +31,14 @@ function MyApp({ Component, pageProps }) {
 			<Head>
 				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 				{/* SEO  */}
-				<title>ArchivosFamiliares</title>
+				<title>FamilyFiles</title>
 				<meta
 					name="description"
-					content="ArchivosFamiliares is your web app to search and track your food and nutrition."
+					content="FamilyFiles is your web app to search and track your family files"
 				/>
 				<meta
 					name="keywords"
-					content="nutrition, food, vitamins, minerals"
+					content="family"
 				/>
 				{/*  PWA  */}
 				<meta
