@@ -91,7 +91,7 @@ export default function Home() {
 				</ion-toolbar>
 			</ion-header>
 
-			<ion-content fullscreen>
+			<ion-content >
 				<ion-header collapse="condense" translucent>
 					<ion-toolbar>
 						<ion-title size="large">{familyName} Files</ion-title>

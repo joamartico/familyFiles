@@ -82,7 +82,7 @@ const member = () => {
 				</ion-toolbar>
 			</ion-header>
 
-			<ion-content fullscreen>
+			<ion-content >
 				<ion-header collapse="condense" translucent>
 					<ion-toolbar>
 						<ion-title size="large">
